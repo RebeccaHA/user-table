@@ -1,11 +1,6 @@
 <template>
   <div>
-    <q-table
-      title="Users"
-      :columns="columns"
-      row-key="name"
-      :rows="this.$store.state.users"
-    >
+    <q-table title="Users" :columns="columns" row-key="name" :rows="users">
     </q-table>
   </div>
 </template>
@@ -13,6 +8,7 @@
 <script>
 import { defineComponent } from "vue";
 import { getUsers } from "../services/users";
+import { mapState, mapActions } from "vuex";
 
 export default defineComponent({
   name: "Table",
@@ -29,17 +25,21 @@ export default defineComponent({
         { name: "email", label: "Email", field: "email", sortable: true },
         { name: "company", label: "Company", field: "company", sortable: true },
         { name: "added", label: "Added", field: "added", sortable: true }
-      ],
-      rows: []
+      ]
     };
   },
   mounted() {
     this.loadUsers();
   },
+  computed: {
+    ...mapState(["/users/users"])
+  },
   methods: {
+    ...mapActions(["/users/setUsers"]),
     async loadUsers() {
       const data = await getUsers();
-      this.$store.dispatch("setUsers", data);
+      console.log(data);
+      this.$store.dispatch("setUsers");
     }
   }
 });
