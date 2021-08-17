@@ -1,13 +1,18 @@
 <template>
   <div>
-    <q-table title="Users" :columns="columns" row-key="name" :rows="this.rows">
+    <q-table
+      title="Users"
+      :columns="columns"
+      row-key="name"
+      :rows="this.$store.state.users"
+    >
     </q-table>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import axios from "axios";
+import { getUsers } from "../services/users";
 
 export default defineComponent({
   name: "Table",
@@ -29,9 +34,13 @@ export default defineComponent({
     };
   },
   mounted() {
-    axios
-      .get("https://renewable.exchange/test/users.json")
-      .then(response => (this.rows = response.data));
+    this.loadUsers();
+  },
+  methods: {
+    async loadUsers() {
+      const data = await getUsers();
+      this.$store.dispatch("setUsers", data);
+    }
   }
 });
 </script>
