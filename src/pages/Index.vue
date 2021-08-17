@@ -6,9 +6,12 @@
 
 <script>
 import { defineComponent } from "vue";
-import Table from "../components/Table.vue";
+import table from "../components/Table.vue";
 
 export default defineComponent({
-  name: "PageIndex"
+  name: "PageIndex",
+  components: {
+    Table
+  }
 });
 </script>
