@@ -32,14 +32,14 @@ export default defineComponent({
     this.loadUsers();
   },
   computed: {
-    ...mapState(["/users/users"])
+    ...mapState(["usersData/users"])
   },
   methods: {
-    ...mapActions(["/users/setUsers"]),
+    ...mapActions("usersData", ["setUsers"]),
     async loadUsers() {
       const data = await getUsers();
       console.log(data);
-      this.$store.dispatch("setUsers");
+      this.$store.dispatch("usersData/setUsers");
     }
   }
 });

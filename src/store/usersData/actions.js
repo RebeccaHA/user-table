@@ -1,3 +1,3 @@
 export default function setUsers({ commit }, data) {
-  commit("setUsers", data);
+  commit("usersData/setUsers", data);
 }
