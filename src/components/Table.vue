@@ -1,6 +1,11 @@
 <template>
   <div>
-    <q-table title="Users" :columns="columns" row-key="name" :rows="users">
+    <q-table
+      title="Users"
+      :columns="columns"
+      row-key="name"
+      :rows="this.usersData.users"
+    >
     </q-table>
   </div>
 </template>
@@ -12,6 +17,7 @@ import { mapState, mapActions } from "vuex";
 
 export default defineComponent({
   name: "Table",
+
   data() {
     return {
       columns: [
@@ -35,11 +41,11 @@ export default defineComponent({
     ...mapState(["usersData/users"])
   },
   methods: {
-    ...mapActions("usersData", ["setUsers"]),
+    ...mapActions(["usersData/setUsers"]),
     async loadUsers() {
       const data = await getUsers();
       console.log(data);
-      this.$store.dispatch("usersData/setUsers");
+      this.$store.dispatch("usersData/setUsers", data);
     }
   }
 });

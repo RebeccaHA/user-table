@@ -1,3 +1,4 @@
-export default function setUsers(state, data) {
+export function setUsers(state, data) {
   state.users = data || [];
+  console.log(state.users);
 }

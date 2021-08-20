@@ -14,7 +14,7 @@ import usersData from "./usersData";
  */
 
 export default store(function(/* { ssrContext } */) {
-  const Store = createStore({
+  const store = createStore({
     modules: {
       usersData
     },
@@ -24,5 +24,5 @@ export default store(function(/* { ssrContext } */) {
     strict: process.env.DEBUGGING
   });
 
-  return Store;
+  return store;
 });
