@@ -35,7 +35,8 @@ export default defineComponent({
       const user = {
         name: this.name,
         email: this.email,
-        company: this.company
+        company: this.company,
+        added: new Date().toISOString().slice(0, 10)
       };
       this.$store.dispatch("usersData/addUsers", user);
     }
