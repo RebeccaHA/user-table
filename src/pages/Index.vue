@@ -1,20 +1,20 @@
 <template>
   <q-page class="flex flex-center">
     <Table></Table>
-    <AddUser></AddUser>
+    <AddUserForm></AddUserForm>
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import Table from "../components/Table";
-import AddUser from "../components/AddUser";
+import AddUserForm from "../components/AddUserForm";
 
 export default defineComponent({
   name: "PageIndex",
   components: {
     Table,
-    AddUser
+    AddUserForm
   }
 });
 </script>
