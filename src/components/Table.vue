@@ -5,8 +5,11 @@
       :columns="columns"
       row-key="name"
       :rows="this.$store.state.usersData.users"
+      selection="multiple"
+      v-model:selected="selected"
     >
     </q-table>
+    <q-btn @click="deleteSelected">Delete</q-btn>
   </div>
 </template>
 
@@ -14,12 +17,14 @@
 import { defineComponent } from "vue";
 import { getUsers } from "../services/users";
 import { mapState, mapActions } from "vuex";
+import usersData from "../store/usersData";
 
 export default defineComponent({
   name: "Table",
 
   data() {
     return {
+      selected: [],
       columns: [
         {
           name: "name",
@@ -41,11 +46,15 @@ export default defineComponent({
     ...mapState(["usersData/users"])
   },
   methods: {
-    ...mapActions(["usersData/setUsers"]),
+    ...mapActions(["usersData/setUsers", "usersData/deleteUsers"]),
     async loadUsers() {
       const data = await getUsers();
       console.log(data);
       this.$store.dispatch("usersData/setUsers", data);
+    },
+    deleteSelected() {
+      const data = this.selected;
+      this.$store.dispatch("usersData/deleteUsers", data);
     }
   }
 });
