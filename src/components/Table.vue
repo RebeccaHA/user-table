@@ -4,7 +4,7 @@
       title="Users"
       :columns="columns"
       row-key="name"
-      :rows="this.usersData.users"
+      :rows="this.$store.state.usersData.users"
     >
     </q-table>
   </div>

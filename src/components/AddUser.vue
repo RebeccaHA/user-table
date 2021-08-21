@@ -10,13 +10,14 @@
         label="Email"
       ></q-input>
       <q-input v-model="company" filled clearable label="Company"></q-input>
-      <q-btn type="submit" label="Submit"></q-btn>
+      <q-btn type="submit" label="Submit" @click="addUser"></q-btn>
     </form>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import { mapState, mapActions } from "vuex";
 
 export default defineComponent({
   name: "AddUser",
@@ -28,9 +29,18 @@ export default defineComponent({
       added: ""
     };
   },
+  computed: {
+    ...mapState(["usersData/users"])
+  },
   methods: {
+    ...mapActions(["usersData/addUsers"]),
     addUser() {
-      console.log("hello");
+      const user = {
+        name: this.name,
+        email: this.email,
+        company: this.company
+      };
+      this.$store.dispatch("usersData/addUsers", user);
     }
   }
 });
