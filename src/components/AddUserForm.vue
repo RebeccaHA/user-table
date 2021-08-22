@@ -39,6 +39,12 @@ export default defineComponent({
         added: new Date().toISOString().slice(0, 10)
       };
       this.$store.dispatch("usersData/addUsers", user);
+      this.clearForm();
+    },
+    clearForm() {
+      this.name = "";
+      this.email = "";
+      this.company = "";
     }
   }
 });
