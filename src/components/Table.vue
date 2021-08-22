@@ -4,11 +4,48 @@
       title="Users"
       :columns="columns"
       row-key="name"
-      :rows="this.$store.state.usersData.users"
+      :rows="users"
       selection="multiple"
       v-model:selected="selected"
     >
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td auto-width>
+            <q-checkbox v-model="props.selected" />
+          </q-td>
+          <q-td key="name" :props="props">
+            {{ props.row.name }}
+            <q-popup-edit v-model="props.row.name" title="Update name" buttons>
+              <q-input v-model="props.row.name"></q-input>
+            </q-popup-edit>
+          </q-td>
+
+          <q-td key="email" :props="props">
+            {{ props.row.email }}
+            <q-popup-edit
+              v-model="props.row.email"
+              title="Update email"
+              buttons
+            >
+              <q-input type="email" v-model="props.row.email"></q-input>
+            </q-popup-edit>
+          </q-td>
+
+          <q-td key="company" :props="props">
+            <div>{{ props.row.company }}</div>
+            <q-popup-edit
+              v-model="props.row.company"
+              title="Update company"
+              buttons
+            >
+              <q-input v-model="props.row.company"></q-input>
+            </q-popup-edit>
+          </q-td>
+          <q-td key="added" :props="props">{{ props.row.added }}</q-td>
+        </q-tr>
+      </template>
     </q-table>
+
     <q-btn @click="deleteSelected">Delete</q-btn>
   </div>
 </template>
@@ -43,7 +80,9 @@ export default defineComponent({
     this.loadUsers();
   },
   computed: {
-    ...mapState(["usersData/users"])
+    users() {
+      return this.$store.state.usersData.users;
+    }
   },
   methods: {
     ...mapActions(["usersData/setUsers", "usersData/deleteUsers"]),
