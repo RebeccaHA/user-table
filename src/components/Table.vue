@@ -89,7 +89,6 @@ export default defineComponent({
     ...mapActions(["usersData/setUsers", "usersData/deleteUsers"]),
     async loadUsers() {
       const data = await getUsers();
-      console.log(data);
       this.$store.dispatch("usersData/setUsers", data);
     },
     deleteSelected() {
