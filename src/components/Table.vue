@@ -45,7 +45,7 @@
         </q-tr>
       </template>
     </q-table>
-    <q-input v-model="search" placeholder="search"></q-input>
+
     <q-btn @click="deleteSelected">Delete</q-btn>
   </div>
 </template>
@@ -62,7 +62,6 @@ export default defineComponent({
   data() {
     return {
       selected: [],
-      search: "",
       columns: [
         {
           name: "name",
