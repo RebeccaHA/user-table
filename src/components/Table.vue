@@ -1,5 +1,10 @@
 <template>
   <div>
+    <q-input
+      type="search"
+      placeholder="Search.."
+      v-model="searchQuery"
+    ></q-input>
     <q-table
       title="Users"
       :columns="columns"
@@ -51,7 +56,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { getUsers } from "../services/users";
 import { mapState, mapActions } from "vuex";
 import usersData from "../store/usersData";
@@ -75,6 +80,14 @@ export default defineComponent({
         { name: "added", label: "Added", field: "added", sortable: true }
       ]
     };
+  },
+  setup() {
+    const searchQuery = ref("");
+  },
+  computed: {
+    searchUsers() {
+      return console.log("helo");
+    }
   },
   mounted() {
     this.loadUsers();
